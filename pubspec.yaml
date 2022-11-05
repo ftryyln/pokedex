@@ -1,0 +1,37 @@
+name: pokedex
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  infinite_scroll_pagination: ^3.2.0
+  dio: ^4.0.6
+  get: ^4.6.5
+  flutter_svg: ^1.1.6
+  cached_network_image: ^3.2.2
+  lottie: ^1.4.3
+  intl: ^0.17.0
+  basic_utils: ^5.4.0
+  linear_progress_bar: "^1.1.0"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/
