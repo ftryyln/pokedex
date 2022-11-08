@@ -35,13 +35,13 @@ class DetailScreen extends StatelessWidget {
               ),
               title: Text(
                   controller.pokemonDetail?.name?.capitalizeFirst ?? '-',
-                  style: TextStyle(color: Colors.white)),
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
               actions: [
                 Container(
                     padding: const EdgeInsets.only(right: 13),
                     alignment: Alignment.center,
                     child: Text('#${controller.formatter.format(pokeid ?? 0)}',
-                        style: TextStyle(color: Colors.white)))
+                        style: TextStyle(fontSize: 18,color: Colors.white, fontWeight: FontWeight.w500)))
               ],
             ),
             body: controller.pokemonDescription.isNotEmpty &&
@@ -61,11 +61,11 @@ class DetailScreen extends StatelessWidget {
                           bottom: 25,
                           right: 0,
                           left: 0,
+                          top: 120,
                           child: Container(
                             margin: const EdgeInsets.all(5),
                             padding: const EdgeInsets.all(15),
                             width: Get.width,
-                            // height: 380,
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10)),
@@ -233,6 +233,7 @@ class DetailScreen extends StatelessWidget {
                                                               minHeight: 7,
                                                               backgroundColor:
                                                                   Colors.grey,
+                                                              valueColor: AlwaysStoppedAnimation(pokecolor),
                                                               color: pokecolor,
                                                               value:
                                                                   (e.baseStat)! /

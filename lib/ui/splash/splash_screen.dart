@@ -11,6 +11,7 @@ class SplashScreen extends StatelessWidget {
     return GetBuilder<SplashController>(
         init: SplashController(),
         builder: (controller) => Scaffold(
+          backgroundColor: Color(0xfff00000),
               body: Center(
                 child: Lottie.asset("assets/pokeball_lottie.json", height: 100),
               ),

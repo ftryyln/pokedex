@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pokedex/const/color.dart';
@@ -17,36 +16,41 @@ class HomeScreen extends StatelessWidget {
         init: HomeController(),
         builder: (controller) {
           return Scaffold(
+            backgroundColor: Color(0xfff00000),
             body: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  // backgroundColor: Colors.white,
+                  backgroundColor: Color(0xfff00000),
                   title: Row(
                     children: [
-                      SvgPicture.asset(
-                        "assets/ic_pokeball.svg",
-                        height: kToolbarHeight,
+                      Image.asset(
+                        "assets/ic_pokeball.png",
+                        height: 50,
+                        width: 50,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Pokedex"),
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Text("Pokédex",
+                            style: TextStyle( color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                            )),
                       )
                     ],
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: Container(
-                    // height: 30,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 30),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 5, top: 35, bottom: 25),
                     child: TextField(
                       decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
                           prefixIcon: const Icon(Icons.search),
                           hintText: "Cari Pokemon",
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(15),
                             borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
+                                const BorderSide(color: Colors.grey, width: 2),
                           )),
                     ),
                   ),
@@ -54,72 +58,76 @@ class HomeScreen extends StatelessWidget {
                 PagedSliverGrid<int, pokemon.Results?>(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      // crossAxisSpacing: 3,
-                      mainAxisExtent: 198),
+                      mainAxisExtent: 160),
                   pagingController: controller.pagingController,
                   builderDelegate: PagedChildBuilderDelegate<pokemon.Results?>(
                       itemBuilder: (context, item, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Get.toNamed("/detail", arguments: {
-                              "id": item?.url
-                                  ?.split("pokemon")
-                                  .last
-                                  .replaceAll("/", "")
-                            });
-                          },
-                          child: Card(
-                            elevation: 2,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  border: Border.all(color: grass)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                    child: Text(
-                                        "#${controller.formatter.format(
-                                            int.parse(item?.url
-                                                ?.split("pokemon")
-                                                .last
-                                                .replaceAll("/", "") ??
-                                                "0"))}"),
-                                  ),
-                                  CachedNetworkImage(
-                                    imageUrl:
-                                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${item
-                                        ?.url
-                                        ?.split("pokemon")
-                                        .last
-                                        .replaceAll("/", "")}.png",
-                                    placeholder: (context, url) =>
-                                        Lottie.asset(
-                                            "assets/pokeball_lottie.json"),
-                                    errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: grass,
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(10),
-                                            bottomRight: Radius.circular(10))),
-                                    height: 40,
-                                    child: Center(
-                                      child:
-                                      Text(item?.name?.capitalizeFirst ?? "-"),
-                                    ),
-                                  )
-                                ],
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed("/detail", arguments: {
+                          "id": item?.url
+                              ?.split("pokemon")
+                              .last
+                              .replaceAll("/", "")
+                        });
+                      },
+                      child: Card(
+                        elevation: 2,
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15), side: BorderSide(
+                          width: 2, color: electric
+                        )
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.white,
+                              border: Border.all(color: electric, width: 2)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, right: 5),
+                                child: Text(
+                                    "#${controller.formatter.format(int.parse(item?.url?.split("pokemon").last.replaceAll("/", "") ?? "0"))}"),
                               ),
-                            ),
+                              Expanded(
+                                child: Center(
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${item?.url?.split("pokemon").last.replaceAll("/", "")}.png",
+                                    placeholder: (context, url) =>
+                                        Lottie.asset("assets/pokeball_lottie.json"),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: electric,
+                                    border: Border.all(color: electric, width: 5),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(13),
+                                        bottomRight: Radius.circular(13))),
+                                height: 40,
+                                child: Center(
+                                  child: Text(
+                                      item?.name?.capitalizeFirst ?? "-",
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
+                                ),
+                              )
+                            ],
                           ),
-                        );
-                      }),
+                        ),
+                      ),
+                    );
+                  }),
                 )
               ],
             ),
