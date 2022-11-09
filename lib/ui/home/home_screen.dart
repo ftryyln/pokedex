@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         init: HomeController(),
         builder: (controller) {
           return Scaffold(
-            backgroundColor: Color(0xfff00000),
+            backgroundColor: background,
             body: CustomScrollView(
               slivers: [
                 SliverAppBar(

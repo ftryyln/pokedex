@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const Color background = Color(0xfff00000);
 const Color rock = Color(0xffB69E31);
 const Color ghost = Color(0xff70559B);
 const Color steel = Color(0xffB7B9D0);

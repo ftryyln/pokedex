@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pokedex/const/color.dart';
 import 'package:pokedex/ui/splash/splash_controller.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class SplashScreen extends StatelessWidget {
     return GetBuilder<SplashController>(
         init: SplashController(),
         builder: (controller) => Scaffold(
-          backgroundColor: Color(0xfff00000),
+          backgroundColor: background,
               body: Center(
                 child: Lottie.asset("assets/pokeball_lottie.json", height: 100),
               ),
